@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>X</title>
+</head>
+<style>
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	html {
+		background: black;
+	}
+	svg {
+	}
+	circle {
+		fill: #eee;
+		stroke: none;
+	}
+	circle:nth-child(1),
+	circle:nth-child(19),
+	circle:nth-child(20),
+	circle:nth-child(32),
+	circle:nth-child(31) {
+		animation: opa 4s 1 both;
+	}
+	@keyframes opa {
+		from {
+			opacity: 1
+		}
+		to {
+			opacity: 0;
+		}
+	}
+</style>
+<body>
+</body>
+<script>
+	const deg1 = -Math.PI/180;
+	const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+	svg.setAttribute("viewBox", "0 0 1000 1000");
+	document.querySelector("body").appendChild(svg);
+
+	const degs = [[90, 120, 69], [0, 36, 189], [0, 18, 306]];
+	degs.forEach( deg => {
+		let angle = deg[0];
+		while(angle <= 360) {
+			angle += deg[1];
+			const cx = deg[2] * Math.cos( angle * deg1) + 500;
+			const cy = deg[2] * Math.sin( angle * deg1) + 500;
+			const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+			c.setAttribute( "cx", cx );
+			c.setAttribute( "cy", cy );
+			c.setAttribute( "r",  44);
+			svg.appendChild(c);
+		}
+
+	});
+</script>
+</html>
